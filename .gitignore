@@ -1,0 +1,12 @@
+/*
+!/.gitignore
+!/source
+!/gulpfile.js
+!/package.json
+!/external
+!/mc
+!/assets_source
+!/assets
+!/views
+!/gulp
+!/index.js
