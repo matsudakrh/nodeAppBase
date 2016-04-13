@@ -12,7 +12,6 @@ var start = function (handle, router) {
 
         router( handle, pathname, req, res);
 
-
     }).listen(8080);
 
 };

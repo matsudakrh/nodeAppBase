@@ -3,13 +3,20 @@
 
 var router = function (handle, pathname, req, res) {
 
-    if ( pathname.indexOf('.css') != -1  ) {
-        console.log('This request is css.');
-        console.log(req);
+    if ( pathname.indexOf('.css') != -1 ) {
         handle.getCss(req, res, pathname);
         return;
     } else if ( pathname.indexOf('.js') != -1 ) {
-        console.log('This request is js.');
+        handle.getJs(req, res, pathname);
+        return;
+    } else if ( pathname.indexOf('.jpg') != -1 ) {
+        handle.getImg(req, res, pathname, 'jpeg');
+        return;
+    } else if ( pathname.indexOf('.png') != -1 ) {
+        handle.getImg(req, res, pathname, 'png');
+        return;
+    } else if ( pathname.indexOf('.gif') != -1 ) {
+        handle.getImg(req, res, pathname, 'gif');
         return;
     } else if ( typeof handle[pathname] === 'function' ) {
         handle[pathname](req, res, pathname);
@@ -17,21 +24,6 @@ var router = function (handle, pathname, req, res) {
     }
 
     handle.render(req, res, pathname);
-
-    //
-    //if ( typeof handle[pathname] === 'function') {
-    //    handle[pathname](req, res, pathname);
-    //
-    ////
-    ////} else if ( pathname.indexof('css') != 0 ) {
-    ////    handle.getCss(req, res, pathname);
-    //}
-    //else {
-    //    res.writeHead(200, {'Content-Type': 'text/plain'});
-    //    res.write('404 Not Found\n');
-    //    res.write(pathname);
-    //    res.end();
-    //}
 
 };
 
