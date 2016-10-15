@@ -3,6 +3,11 @@
 
 var router = function (handle, pathname, req, res) {
 
+    if ( pathname.indexOf('.json') != -1 ) {
+        handle.getCss(req, res, pathname);
+        return;
+    }
+
     if ( pathname.indexOf('.css') != -1 ) {
         handle.getCss(req, res, pathname);
         return;

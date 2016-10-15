@@ -1,6 +1,7 @@
 
 var fs = require('fs');
 var jade = require('jade');
+var http = require('http');
 
 
 var render = function (req, res, pathname) {
@@ -12,8 +13,8 @@ var render = function (req, res, pathname) {
         path = pathname + 'index';
     }
 
-    console.log(req['method']);
-    console.log(res);
+    // console.log(req['method']);
+    // console.log(res);
 
     fs.readFile( './views' + path + '.jade', 'utf8',function (err, data) {
 
@@ -93,9 +94,77 @@ var getImg = function (req, res, pathname, type) {
 
 };
 
+var getData = function ( url, savePath, callback ) {
+
+
+    var outfile = fs.createWriteStream(savePath);
+
+
+    http.get( url, function ( data ) {
+
+        data.pipe(outfile);
+        data.on( 'end', function () {
+            outfile.close();
+            callback();
+        });
+
+    });
+
+};
+
+
+
+var returnJSON = function ( req, res, pathname ) {
+
+
+    res.writeHead(200, {'Content-Type': 'application/json'});
+
+    var data = {
+        id: 2,
+        message: 'こんにちは！'
+    };
+
+    var json = JSON.stringify(data);
+
+    res.write(json);
+    res.end();
+
+};
+
+
+
+
+var aozora = function ( req, res, pathname ) {
+
+    render( req, res, pathname );
+
+    getData(
+        'http://www.aozora.gr.jp/cards/001047/card42924.html',
+        'downloads/ienakiko01.html',
+        function () {
+        console.log('complete');
+    });
+
+    getData(
+        'http://www.aozora.gr.jp/cards/001047/card42925.html',
+        'downloads/ienakiko02.html',
+        function () {
+        console.log('complete');
+    });
+
+
+
+};
+
+
+
 
 exports.getCss = getCss;
 exports.getJs = getJs;
 exports.getImg = getImg;
 
 exports.render = render;
+
+
+exports.getData = getData;
+exports.aozora = aozora;

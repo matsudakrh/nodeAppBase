@@ -15,7 +15,6 @@
 
         map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
 
-
         markerOptions = {
             position: latlng,
             map: map,

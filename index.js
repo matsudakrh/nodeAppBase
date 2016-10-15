@@ -10,5 +10,7 @@ handle.render = handler.render;
 handle.getCss = handler.getCss;
 handle.getJs = handler.getJs;
 handle.getImg = handler.getImg;
+handle.getData = handler.getData;
+handle['/aozora'] = handler.aozora;
 
 server.start( handle, router.router );
